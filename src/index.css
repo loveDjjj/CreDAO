@@ -1,0 +1,67 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(114, 113, 113);
+  border-radius: 10px;
+  height: 200px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.category-btn {
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 6px 6px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.category-btn:hover {
+  background-color: #f2f2f2 !important;
+  color: #000 !important;
+}
+
+.react-player {
+  height: 77vh !important;
+  width: 100% !important;
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  width: 400px;
+  height: 40px;
+}
+
+@font-face {
+  font-family: "Microsoft YaHei";
+  src: url("/public/MicrosoftYaHei.ttf") format("truetype");
+}
+
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+}
