@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { searchVideos, fetchFromAPI } from "../../utils/API"; // 导入搜索视频的函数
-import VideoList from "../Video/VideoList";
-import Sidebar from "../SideBar/SideBar";
-import { VideoTypes } from "../Video/VideoTypes";
+import { searchVideos } from "../API"; // 导入搜索视频的函数
+import VideoList from "./Video/VideoList";
+import { VideoTypes } from "./Video/VideoTypes";
+import Sidebar from "./SideBar/SideBar"; // 将 Sidebar 直接引入
 
 const Feed: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("New");
@@ -13,92 +13,12 @@ const Feed: React.FC = () => {
   const { searchTerm: paramSearchTerm } = useParams<{ searchTerm?: string }>();
 
   useEffect(() => {
-    if (paramSearchTerm) {
-      setSearchTerm(paramSearchTerm);
+    if (paramSearchTerm !== undefined) {
+      // 修改此处，将条件改为判断是否为 undefined
+      setSearchTerm(paramSearchTerm || ""); // 修改此处，将空字符串作为备选值
       setSelectedCategory(""); // 清空侧边栏选中状态
     } else {
       setSearchTerm(""); // 清空搜索词
-    }
-  }, [paramSearchTerm]);
-
-  useEffect(() => {
-    let url = "";
-    if (searchTerm) {
-      url = `search?part=snippet&q=${searchTerm}`;
-    } else {
-      url = `search?part=snippet&q=${selectedCategory}`;
-    }
-
-    fetchData(url);
-  }, [selectedCategory, searchTerm]);
-
-  const fetchData = async (url: string) => {
-    try {
-      const data = await fetchFromAPI(url);
-      setVideos(data.items);
-    } catch (error) {
-      console.error("Error fetching videos:", error);
-      setVideos([]);
-    }
-  };
-
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setSearchTerm("");
-  };
-
-  return (
-    <Stack direction={{ xs: "column", md: "row" }}>
-      <SidebarFeed
-        selectedCategory={selectedCategory}
-        handleCategoryChange={handleCategoryChange}
-      />
-      <Box p={0} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
-        <VideoList videoList={videos || []} />
-      </Box>
-    </Stack>
-  );
-};
-
-const SidebarFeed: React.FC<{
-  selectedCategory: string;
-  handleCategoryChange: (category: string) => void;
-}> = ({ selectedCategory, handleCategoryChange }) => {
-  return (
-    <Box
-      sx={{
-        width: "200px",
-        height: "90vh",
-        px: "5px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        overflowY: "hidden", // 修改为隐藏滚动条
-      }}
-    >
-      <Sidebar
-        selectedCategory={selectedCategory}
-        setSelectedCategory={handleCategoryChange}
-      />
-      <Typography
-        className="copyright"
-        variant="body2"
-        sx={{ textAlign: "center", color: "#7F7F7F" }}
-      >
-        © CreDAO Users Version
-      </Typography>
-    </Box>
-  );
-};
-
-const SearchFeed: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [videos, setVideos] = useState<VideoTypes[] | null>(null);
-  const { searchTerm: paramSearchTerm } = useParams<{ searchTerm?: string }>();
-
-  useEffect(() => {
-    if (paramSearchTerm) {
-      setSearchTerm(paramSearchTerm);
     }
   }, [paramSearchTerm]);
 
@@ -114,7 +34,56 @@ const SearchFeed: React.FC = () => {
       });
   }, [searchTerm]);
 
-  return <VideoList videoList={videos || []} />;
+  useEffect(() => {
+    if (!selectedCategory) return;
+
+    const url = `search?part=snippet&q=${selectedCategory}`;
+
+    searchVideos(selectedCategory)
+      .then((data) => setVideos(data))
+      .catch((error) => {
+        console.error("Error fetching videos:", error);
+        setVideos([]);
+      });
+  }, [selectedCategory]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setSearchTerm("");
+  };
+
+  return (
+    <Stack direction={{ xs: "column", md: "row" }}>
+      <Box
+        sx={{
+          width: "200px",
+          height: "90vh",
+          px: "5px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          overflowY: "hidden", // 修改为隐藏滚动条
+        }}
+      >
+        <Sidebar
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          handleCategoryChange={handleCategoryChange}
+        />
+
+        <Typography
+          className="copyright"
+          variant="body2"
+          sx={{ textAlign: "center", color: "#7F7F7F" }}
+        >
+          © CreDAO Users Version
+        </Typography>
+      </Box>
+      <Box p={0} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+        <VideoList videoList={videos || []} />
+      </Box>
+    </Stack>
+  );
 };
 
 export default Feed;
