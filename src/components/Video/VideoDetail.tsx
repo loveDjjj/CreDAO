@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { Typography, Box, Stack } from "@mui/material";
-import { SearchIcon } from "./SearchBar/icons";
-import VideoList from "./Video/VideoList";
-import { VideoTypes } from "./Video/VideoTypes";
-import { fetchVideoInfo, fetchChannelInfo } from "../utils/API"; // 导入从 API 中获取视频和频道信息的函数
-import Loader from "./Loader";
+import { SearchIcon } from "./icons";
+import VideoList from "./VideoList";
+import { VideoTypes } from "./VideoTypes";
+import { fetchVideoInfo, fetchChannelInfo } from "../../API"; // 导入从 API 中获取视频和频道信息的函数
+import Loader from "../Loader";
 
 const VideoDetail: React.FC = () => {
   const [videoDetail, setVideoDetail] = useState<VideoTypes | null>(null);
   const [videos, setVideos] = useState<VideoTypes[] | null>(null);
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>() ?? { id: "" };
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!id) return; // 如果 id 为空，则直接返回
+
       try {
         const videoDetailData = await fetchVideoInfo(id);
         const relatedVideosData = await fetchChannelInfo(
