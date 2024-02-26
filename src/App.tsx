@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
-import VideoDetail from "./components/VideoDetail";
-import Feed from "./components/Feed/Feed";
+import VideoDetail from "./components/Video/VideoDetail";
+import Feed from "./components/Feed";
 import Navbar from "./components/NavBar/NavBar";
 
 const App: React.FC = () => (
