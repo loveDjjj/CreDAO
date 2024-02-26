@@ -3,7 +3,7 @@ import { Box, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { SearchIcon } from "../SearchBar/icons";
 import { VideoTypes } from "./VideoTypes";
-import { fetchChannelInfo } from "../../utils/API";
+import { fetchChannelInfo } from "../../API";
 
 const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
   const { id, snippet } = video;
