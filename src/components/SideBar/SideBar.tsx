@@ -51,6 +51,7 @@ const categories: Category[] = [
 interface SidebarProps {
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  handleCategoryChange: (category: string) => void; // 添加 handleCategoryChange 属性
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
