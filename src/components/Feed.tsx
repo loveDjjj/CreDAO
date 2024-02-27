@@ -57,7 +57,7 @@ const Feed: React.FC = () => {
       <Box
         sx={{
           width: "200px",
-          height: "90vh",
+          height: "92vh",
           px: "5px",
           display: "flex",
           flexDirection: "column",
@@ -79,7 +79,7 @@ const Feed: React.FC = () => {
           © CreDAO Users Version
         </Typography>
       </Box>
-      <Box p={0} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+      <Box p={0} sx={{ overflowY: "auto", height: "92vh", flex: 2 }}>
         <VideoList videoList={videos || []} maxCards={20} />
       </Box>
     </Stack>
