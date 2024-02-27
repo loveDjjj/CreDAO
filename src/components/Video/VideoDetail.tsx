@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { Typography, Box, Stack } from "@mui/material";
-import { SearchIcon } from "./icons";
+import DetailIcon from "./icons";
 import VideoList from "./VideoList";
 import { VideoTypes } from "./VideoTypes";
 import { fetchVideoInfo, fetchChannelInfo } from "../../API"; // 导入从 API 中获取视频和频道信息的函数
@@ -63,7 +63,7 @@ const VideoDetail: React.FC = () => {
               <Link to={`/channel/${channelId}`}>
                 <Typography variant="subtitle1" color="#fff">
                   {channelTitle}
-                  <SearchIcon fill="#7F7F7F" width={24} height={24} />
+                  <DetailIcon fill="#7F7F7F" width={24} height={24} />
                 </Typography>
               </Link>
               <Stack direction="row" gap="20px" alignItems="center">
