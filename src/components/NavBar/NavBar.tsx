@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = () => (
       position: "sticky",
       background: "#FFF",
       top: 0,
-      height: "10vh",
+      height: "8vh",
     }}
   >
     {/* 左侧区域 */}
@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = () => (
       <SearchBar />
     </Stack>
     {/* 右侧图标区域 */}
-    <Stack direction="row" alignItems="center" spacing={1.6} marginRight= "20px" >
+    <Stack direction="row" alignItems="center" spacing={1.6} marginRight="20px">
       {/* 钱包图标 */}
       <IconButton sx={{ padding: 0 }}>
         <WalletIcon width={28} height={28} />
@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = () => (
         <AdvertisementsIcon width={28} height={28} />
       </IconButton>
       {/* 用户头像图标 */}
-      <IconButton sx={{ padding: 0}}>
+      <IconButton sx={{ padding: 0 }}>
         <Box
           component="span"
           sx={{
