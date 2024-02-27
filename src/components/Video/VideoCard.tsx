@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, CardMedia, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { SearchIcon } from "../SearchBar/icons";
+import DetailIcon from "./icons";
 import { VideoTypes } from "./VideoTypes";
 import { fetchChannelInfo } from "../../API";
 
@@ -56,9 +56,16 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
 
       <Box sx={{ width: 288, display: "flex" }}>
         <Box sx={{ marginTop: "10px", marginRight: "10px" }}>
-          <img src={channelAvatar} alt={channelTitle} width={38} height={38} />
+          <img
+            src={channelAvatar}
+            alt={channelTitle}
+            width={25}
+            height={25}
+            style={{ borderRadius: "50%" }}
+          />
         </Box>
-        <Box sx={{ marginTop: "10px", width: "calc(100% - 68px)" }}>
+
+        <Box sx={{ marginTop: "10px", width: "calc(100% - 60px)" }}>
           <Typography
             sx={{
               lineHeight: "18px",
@@ -68,8 +75,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
               variant: "subtitle1",
-              fontSize: "16px",
-              fontWeight: "normal",
+              fontSize: "14px",
               color: "#000",
             }}
           >
@@ -78,17 +84,21 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
             </Link>
           </Typography>
 
-          <Typography sx={{ fontSize: "14px", marginTop: "5px" }}>
+          <Typography
+            sx={{ fontSize: "10px", fill: "#7F7F7F", marginTop: "5px" }}
+          >
             {snippet?.channelTitle}
           </Typography>
 
-          <Typography sx={{ fontSize: "14px", marginTop: "5px" }}>
+          <Typography
+            sx={{ fontSize: "10px", fill: "#7F7F7F", marginTop: "2px" }}
+          >
             观看次数: {viewCount} • 发布时间: {publishedAt}
           </Typography>
         </Box>
 
         <Box sx={{ marginTop: "10px", marginLeft: "5px" }}>
-          <SearchIcon fill="#7F7F7F" width={20} height={20} />
+          <DetailIcon fill="#7F7F7F" width={20} height={20} />
         </Box>
       </Box>
     </Box>
