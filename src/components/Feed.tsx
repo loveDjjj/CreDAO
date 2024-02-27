@@ -80,7 +80,7 @@ const Feed: React.FC = () => {
         </Typography>
       </Box>
       <Box p={0} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
-        <VideoList videoList={videos || []} />
+        <VideoList videoList={videos || []} maxCards={20} />
       </Box>
     </Stack>
   );
