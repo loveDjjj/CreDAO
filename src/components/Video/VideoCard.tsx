@@ -87,14 +87,12 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           </Typography>
 
           <Typography
-            sx={{ fontSize: "12px", fill: "#7F7F7F", marginTop: "5px" }}
+            sx={{ fontSize: "14px", fill: "#7F7F7F", marginTop: "5px" }}
           >
             {snippet?.channelTitle}
           </Typography>
 
-          <Typography
-            sx={{ fontSize: "12px", fill: "#7F7F7F", marginTop: "2px" }}
-          >
+          <Typography sx={{ fontSize: "14px", fill: "#7F7F7F" }}>
             {viewCount !== undefined ? viewCount : "Loading..."}次观看 •{" "}
             {publishedAt}
           </Typography>
