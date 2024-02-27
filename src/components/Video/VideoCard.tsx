@@ -27,14 +27,16 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
   }, [snippet?.channelId]);
 
   useEffect(() => {
-    setViewCount(snippet.statistics?.viewCount);
+    if (snippet?.statistics?.viewCount !== undefined) {
+      setViewCount(snippet.statistics.viewCount);
+    }
     setPublishedAt(snippet.publishedAt);
-  }, [id.videoId]);
+  }, [id.videoId, snippet?.statistics?.viewCount, snippet.publishedAt]);
 
   return (
     <Box
       sx={{
-        width: 288,
+        width: 352,
         marginRight: 3,
         marginBottom: 5,
         display: "flex",
@@ -50,17 +52,17 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           component="img"
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
-          sx={{ width: 288, height: 162, borderRadius: "10px" }}
+          sx={{ width: 352, height: 198, borderRadius: "10px" }}
         />
       </Link>
 
-      <Box sx={{ width: 288, display: "flex" }}>
+      <Box sx={{ width: 352, display: "flex" }}>
         <Box sx={{ marginTop: "10px", marginRight: "10px" }}>
           <img
             src={channelAvatar}
             alt={channelTitle}
-            width={25}
-            height={25}
+            width={30}
+            height={30}
             style={{ borderRadius: "50%" }}
           />
         </Box>
@@ -75,7 +77,7 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
               variant: "subtitle1",
-              fontSize: "14px",
+              fontSize: "16px",
               color: "#000",
             }}
           >
@@ -85,20 +87,21 @@ const VideoCard: React.FC<{ video: VideoTypes }> = ({ video }) => {
           </Typography>
 
           <Typography
-            sx={{ fontSize: "10px", fill: "#7F7F7F", marginTop: "5px" }}
+            sx={{ fontSize: "12px", fill: "#7F7F7F", marginTop: "5px" }}
           >
             {snippet?.channelTitle}
           </Typography>
 
           <Typography
-            sx={{ fontSize: "10px", fill: "#7F7F7F", marginTop: "2px" }}
+            sx={{ fontSize: "12px", fill: "#7F7F7F", marginTop: "2px" }}
           >
-            观看次数: {viewCount} • 发布时间: {publishedAt}
+            {viewCount !== undefined ? viewCount : "Loading..."}次观看 •{" "}
+            {publishedAt}
           </Typography>
         </Box>
 
         <Box sx={{ marginTop: "10px", marginLeft: "5px" }}>
-          <DetailIcon fill="#7F7F7F" width={20} height={20} />
+          <DetailIcon fill="#000" width={15} height={15} />
         </Box>
       </Box>
     </Box>
