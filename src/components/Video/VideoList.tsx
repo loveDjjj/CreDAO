@@ -14,6 +14,7 @@ const VideoList: React.FC<VideoListProps> = ({ videoList, direction }) => {
       direction={direction || "row"}
       flexWrap="wrap"
       justifyContent="center"
+      marginTop="10px"
     >
       {videoList.map((video, index) => (
         // 使用 Box 组件包裹每个视频卡片
